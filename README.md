@@ -13,10 +13,12 @@
 ## Resources
 - [Github Action Workflow syntax](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)
 - [Github marketplace of actions](https://github.com/marketplace?type=actions)
+- [Running pull_request workflow when a pull request merges](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#running-your-pull_request-workflow-when-a-pull-request-merges)
 
 
 ## Points to remember
 - In github, every pull request is an issue. But not every issue is a pull request.
+- When a pull request is merges, the PR is automatically closed.
 
 
 ## License

@@ -9,6 +9,7 @@ on:
 # See @https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#on
 jobs:
   no-plans-to-merge:
+    if: github.event.pull_request.merged == false
     runs-on: ubuntu-latest
     steps:
       - name: Create a Comment on the PR
