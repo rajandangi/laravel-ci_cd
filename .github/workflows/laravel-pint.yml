@@ -10,8 +10,8 @@ jobs:
   laravel-pint:
     runs-on: ubuntu-latest
 
-    env:
-      GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN_FOR_GITHUB_SCRIPT }}
+    # env:
+    #   GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN_FOR_GITHUB_SCRIPT }}
 
     steps:
       # See @https://github.com/marketplace/actions/checkout
