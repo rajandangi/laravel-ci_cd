@@ -14,7 +14,9 @@
 - [Github Action Workflow syntax](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)
 - [Github marketplace of actions](https://github.com/marketplace?type=actions)
 - [Running pull_request workflow when a pull request merges](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#running-your-pull_request-workflow-when-a-pull-request-merges)
-
+- [Github Action Checkout](https://github.com/marketplace/actions/checkout)
+- [Github Action : Github Script](https://github.com/marketplace/actions/github-script)
+- [Setup PHP Action](https://github.com/marketplace/actions/setup-php-action)
 
 ## Points to remember
 - In github, every pull request is an issue. But not every issue is a pull request.
