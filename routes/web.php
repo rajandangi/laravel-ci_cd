@@ -7,7 +7,7 @@ Route::get('/', function () {
 });
 
 
-// Dummy route
+// Dummy route-updated
 Route::get('/dummy', function () {
     return 'Dummy route';
 });
