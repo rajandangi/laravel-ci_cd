@@ -1,1 +1,25 @@
 name: No Plans to Merge
+
+# See @https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#on
+on:
+  pull_request:
+    types:
+      - closed
+
+# See @https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#on
+jobs:
+  no-plans-to-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create a Comment on the PR
+
+        # See @https://github.com/marketplace/actions/github-script
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'No Plans to Merge 👋'
+            })
