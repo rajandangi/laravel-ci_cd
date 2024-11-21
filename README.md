@@ -17,6 +17,8 @@
 - [Github Action Checkout](https://github.com/marketplace/actions/checkout)
 - [Github Action : Github Script](https://github.com/marketplace/actions/github-script)
 - [Setup PHP Action](https://github.com/marketplace/actions/setup-php-action)
+- [Automatic Access Token Authentication](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication)
+
 
 ## Points to remember
 - In github, every pull request is an issue. But not every issue is a pull request.

@@ -9,9 +9,13 @@ jobs:
 
   laravel-pint:
     runs-on: ubuntu-latest
-
-    # env:
-    #   GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN_FOR_GITHUB_SCRIPT }}
+    permissions:
+      pull-requests: write # Necessary to comment on PRs
+      actions: write       # Necessary to cancel workflow executions
+      packages: write
+      deployments: write
+      statuses: write
+      contents: write
 
     steps:
       # See @https://github.com/marketplace/actions/checkout
