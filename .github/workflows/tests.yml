@@ -1,0 +1,40 @@
+name: Run Laravel Tests
+
+on:
+  pull_request
+
+
+
+jobs:
+
+  laravel-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # See @https://github.com/marketplace/actions/checkout
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+
+      # See @https://github.com/marketplace/actions/setup-php-action
+      - name: Setup PHP and Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          tools: composer:v2
+
+      - name: Install Composer Dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Copy .env File
+        run: cp .env.example .env
+
+      - name: Generate an App Key
+        run: php artisan key:generate
+
+      - name: Run Tests
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ":memory:"
+        run: php artisan test --compact
