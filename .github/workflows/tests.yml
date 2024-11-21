@@ -1,27 +1,36 @@
 name: Run Laravel Tests
 
-on:
-  pull_request
-
-
+on: pull_request
 
 jobs:
-
   laravel-tests:
     runs-on: ubuntu-latest
+
+    services:
+      redis:
+        image: redis:7.4
+        ports:
+          - 6379:6379
+
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: laravel
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        ports:
+          - 3306:3306
 
     steps:
       # See @https://github.com/marketplace/actions/checkout
       - name: Checkout Code
         uses: actions/checkout@v4
 
-
       # See @https://github.com/marketplace/actions/setup-php-action
       - name: Setup PHP and Composer
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          php-version: "8.3"
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, gd, redis,igbinary,msgpack,lzf,zstd,lz4,memcached
           tools: composer:v2
 
       - name: Install Composer Dependencies
@@ -34,7 +43,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Run Tests
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: ":memory:"
+        # env:
+        #   DB_CONNECTION: sqlite
+        #   DB_DATABASE: ":memory:"
         run: php artisan test --compact
