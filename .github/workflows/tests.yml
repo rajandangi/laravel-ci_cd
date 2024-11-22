@@ -29,6 +29,7 @@ jobs:
         uses: ./.github/actions/setup # Use the local action
         with:
             php-version: "8.3"
+            coverage: xdebug
 
       - name: Install Composer Dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
@@ -43,4 +44,4 @@ jobs:
         # env:
         #   DB_CONNECTION: sqlite
         #   DB_DATABASE: ":memory:"
-        run: php artisan test --compact
+        run: php artisan test --compact --coverage --min=75
