@@ -14,7 +14,7 @@ Route::get('/', function () {
     ]);
 });
 
-// Dummy route-updated
+// Dummy route-updated-again
 Route::get('/dummy', function () {
     return 'Dummy route';
 });
