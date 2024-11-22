@@ -1,0 +1,60 @@
+name: Setup
+
+description: |
+  This action sets up the php and composer environment for the workflow.
+
+inputs:
+  php-version:
+    description: The PHP version(s) to setup.
+    required: true
+  php-extensions:
+    description: The PHP extensions to install.
+    required: false
+    default: dom, curl, libxml, mbstring, zip, pcntl, pdo, gd, redis,igbinary,msgpack,lzf,zstd,lz4,memcached
+
+runs:
+  using: composite
+  steps:
+    - name: Get PHP extension cache hash
+      id: get-ext-cache-hash
+      env:
+        PHP_EXTENSIONS: ${{ inputs.php-extensions }}
+      run: echo hash=$(echo "${PHP_EXTENSIONS}" | md5sum | awk '{print $1}') >> $GITHUB_OUTPUT
+      shell: bash
+
+    # See @https://github.com/shivammathur/cache-extensions?tab=readme-ov-file#workflow
+    - name: Setup cache environment
+      id: extcache
+      uses: shivammathur/cache-extensions@v1
+      with:
+        php-version: ${{ inputs.php-version }}
+        extensions: ${{ inputs.php-extensions }}
+        key: php-extensions-${{ steps.get-ext-cache-hash.outputs.hash }} # Good practice to prefix with some string
+
+    - name: Cache extensions
+      uses: actions/cache@v4.1.2
+      with:
+        path: ${{ steps.extcache.outputs.dir }}
+        key: ${{ steps.extcache.outputs.key }}
+        restore-keys: ${{ steps.extcache.outputs.key }}
+
+    # See @https://github.com/marketplace/actions/setup-php-action
+    - name: Setup PHP and Composer
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ inputs.php-version }}
+        extensions: ${{ inputs.php-extensions }}
+        tools: composer:v2
+
+    # See @https://github.com/marketplace/actions/setup-php-action#cache-composer-dependencies
+    - name: Get Composer Cache Directory
+      id: composer-cache
+      run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Cache Dependencies
+      uses: actions/cache@v4.1.2
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-composer

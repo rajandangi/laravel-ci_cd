@@ -1,3 +1,4 @@
+# See @https://laravel.com/docs/11.x/pint#running-tests-on-github-actions
 name: Laravel Pint
 
 on:
@@ -25,11 +26,11 @@ jobs:
           ref: ${{ github.head_ref }}
 
       # See @https://github.com/marketplace/actions/setup-php-action
-      - name: Setup PHP and Composer
-        uses: shivammathur/setup-php@v2
+      - name: Setup
+        uses: ./.github/actions/setup # Use the local action
         with:
-          php-version: '8.3'
-          tools: composer:v2
+            php-version: "8.3"
+            php-extensions: "json, dom, curl, libxml, mbstring"
 
       - name: Install Laravel Pint
         run: composer global require laravel/pint
