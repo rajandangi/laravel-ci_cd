@@ -8,7 +8,15 @@
 </p>
 
 ## Continuous Integration in Laravel
-[TODO]
+Continuous integration (CI) using GitHub Actions in a Laravel application.
+
+## Key Concepts
+1. **GitHub Actions Configuration**
+    - Automating testing and deployment processes with GitHub Actions.
+    - Creating [custom actions](https://github.com/rajandangi/laravel-ci_cd/blob/main/.github/actions/setup/action.yml) to streamline workflows and reduce code repetition.
+2. **Dependency Caching**
+    - Enhancing CI efficiency by caching PHP extensions and Composer dependencies.
+
 
 ## Resources
 - [Github Action Workflow syntax](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)
